@@ -82,6 +82,19 @@ npm run start-streamlit-agent
 - **Interfaz Web**: http://localhost:8501
 - **API Flask**: http://127.0.0.1:5050
 
+## Agentes Disponibles
+
+El sistema de agentes con memoria incluye las siguientes personalidades:
+
+- **TechBot** - Asistente de Soporte Técnico especializado en programación y tecnología
+- **MathBot** - Tutor de Matemáticas que explica conceptos paso a paso
+- **ChefBot** - Chef Personal experto en cocina internacional
+- **FitBot** - Entrenador Personal para rutinas y consejos de fitness
+- **CreativeBot** - Asistente Creativo para proyectos artísticos
+- **BizBot** - Consultor de Negocios para estrategias empresariales
+
+Además, puedes crear agentes personalizados con instrucciones específicas desde la interfaz.
+
 ## Ayuda
 
 Para ver todas las opciones disponibles:

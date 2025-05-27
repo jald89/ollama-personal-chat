@@ -1,6 +1,8 @@
-# Chat Personal con Ollama
+# Chat Personal con Ollama (Versión Básica)
 
-Este proyecto es un chatbot personal que utiliza Ollama con el modelo Llama 3.2 para procesar consultas y generar respuestas. Consta de un backend en Flask y una interfaz de usuario en Streamlit.
+Este proyecto implementa un chatbot personal que utiliza Ollama con el modelo Llama 3.2 para procesar consultas y generar respuestas. Consta de un backend en Flask y una interfaz de usuario en Streamlit.
+
+Esta es la versión básica del chat, que proporciona una interfaz simple para interactuar con el modelo de lenguaje sin funcionalidades avanzadas como memoria o personalidades.
 
 ## Requisitos Previos
 
@@ -84,7 +86,7 @@ Este proyecto es un chatbot personal que utiliza Ollama con el modelo Llama 3.2 
    ```
    o
    ```
-   flask run
+   flask run port=5050
    ```
 3. El servidor debería iniciarse en http://127.0.0.1:5000
 
@@ -103,6 +105,18 @@ Este proyecto es un chatbot personal que utiliza Ollama con el modelo Llama 3.2 
 2. Haz clic en el botón "Enviar".
 3. Espera a que el modelo procese tu consulta y muestre la respuesta.
 
+### Ejemplos de Consultas
+
+Puedes hacer preguntas sobre diversos temas como:
+
+- "¿Qué es la inteligencia artificial?"
+- "Explícame cómo funciona un motor de combustión interna"
+- "Escribe un poema sobre la naturaleza"
+- "¿Cuáles son los principios básicos de la programación?"
+- "Dame una receta de pan casero"
+
+Recuerda que este chat básico no mantiene el contexto de la conversación, por lo que cada pregunta es tratada de forma independiente.
+
 ## Solución de Problemas
 
 - Si encuentras errores relacionados con la conexión al servidor Flask, asegúrate de que el servidor esté ejecutándose en http://127.0.0.1:5000.
@@ -112,3 +126,6 @@ Este proyecto es un chatbot personal que utiliza Ollama con el modelo Llama 3.2 
 
 - Este proyecto utiliza el modelo llama3.2:1b, pero puedes modificar el archivo app.py para usar otros modelos disponibles en Ollama.
 - Para una mejor experiencia, se recomienda ejecutar este proyecto en una máquina con suficientes recursos (especialmente RAM).
+- Esta versión básica no incluye memoria de conversación. Cada mensaje es procesado de forma independiente.
+- Si necesitas funcionalidades avanzadas como memoria persistente o agentes especializados, considera usar la versión "agent_with_memory" del proyecto.
+- El puerto predeterminado para el servidor Flask es 5050 y para Streamlit es 8501.
