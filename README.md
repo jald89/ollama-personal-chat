@@ -59,7 +59,23 @@ Este proyecto es un chatbot personal que utiliza Ollama con el modelo Llama 3.2 
 
 ## Ejecución del Proyecto
 
-### Paso 6: Iniciar el Servidor Backend
+### Opción 1: Inicio Rápido (Recomendado)
+
+1. Abre una terminal y navega hasta la carpeta del proyecto.
+2. Ejecuta el script de inicio:
+   ```
+   ./start.sh
+   ```
+   o si tienes Node.js instalado:
+   ```
+   npm start
+   ```
+3. El script iniciará automáticamente tanto el servidor Flask como la aplicación Streamlit, y te mostrará las URLs para acceder a la interfaz.
+4. Para detener todos los servicios, simplemente presiona Ctrl+C en la terminal donde ejecutaste el script.
+
+### Opción 2: Inicio Manual
+
+#### Paso 1: Iniciar el Servidor Backend
 
 1. Abre una terminal y navega hasta la carpeta del proyecto.
 2. Ejecuta el servidor Flask:
@@ -72,7 +88,7 @@ Este proyecto es un chatbot personal que utiliza Ollama con el modelo Llama 3.2 
    ```
 3. El servidor debería iniciarse en http://127.0.0.1:5000
 
-### Paso 7: Iniciar la Interfaz Web
+#### Paso 2: Iniciar la Interfaz Web
 
 1. Abre otra terminal y navega hasta la carpeta del proyecto.
 2. Ejecuta la aplicación Streamlit:
