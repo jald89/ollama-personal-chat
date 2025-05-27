@@ -1,114 +1,97 @@
 # Chat Personal con Ollama
 
-Este proyecto es un chatbot personal que utiliza Ollama con el modelo Llama 3.2 para procesar consultas y generar respuestas. Consta de un backend en Flask y una interfaz de usuario en Streamlit.
+Este proyecto implementa un chat interactivo utilizando Ollama con el modelo Llama 3.2, ofreciendo dos versiones diferentes:
+
+1. **Chat Básico** - Una interfaz simple para conversar con el modelo.
+2. **Sistema de Agentes IA** - Una versión avanzada con múltiples personalidades y memoria persistente.
 
 ## Requisitos Previos
 
-### Paso 1: Descarga e Instalación de Ollama
+- [Ollama](https://ollama.com) instalado
+- Modelo llama3.2:1b descargado (`ollama pull llama3.2:1b`)
+- Python 3.8 o superior
+- Dependencias: Flask, Streamlit, Requests, Ollama
 
-1. Visita el sitio web de Ollama:
-   - Abre tu navegador y navega a [ollama.com](https://ollama.com).
-   - Busca la sección de descargas y selecciona la versión adecuada para tu sistema operativo (Windows, macOS, etc.).
+## Instalación
 
-2. Descarga e Instala:
-   - Haz clic en el botón de descarga.
-   - Una vez descargado el archivo ejecutable, haz doble clic en él para comenzar la instalación.
-   - Sigue las instrucciones en pantalla para completar el proceso.
-
-### Paso 2: Verificación de la Instalación de Ollama
-
-1. Abre la terminal:
-   - Para Windows, abre la terminal escribiendo `cmd` en el menú de inicio.
-   - Para Mac o Linux, puedes usar la aplicación "Terminal".
-
-2. Comprueba la instalación:
-   - En la terminal, escribe el siguiente comando para verificar que Ollama se haya instalado correctamente:
-     ```
-     ollama -v
-     ```
-   - Esto debería mostrar la versión instalada de Ollama, confirmando que la instalación fue exitosa.
-
-### Paso 3: Instalación del Modelo Llama 3.2
-
-1. Descarga el Modelo Llama 3.2:
-   - Ejecuta el siguiente comando para descargar e instalar el modelo:
-     ```
-     ollama pull llama3.2:1b
-     ```
-   - Esto descargará e instalará el modelo en tu máquina.
-
-2. Verifica la Instalación del Modelo:
-   - Puedes listar los modelos disponibles en Ollama con:
-     ```
-     ollama list
-     ```
-   - Deberías ver llama3.2:1b en la lista de modelos instalados.
-
-## Instalación del Proyecto
-
-### Paso 4: Instalar Dependencias de Python
-
-1. Instala las bibliotecas necesarias:
+1. Clona o descarga este repositorio
+2. Instala las dependencias:
    ```
-   pip install ollama flask streamlit requests
+   pip install -r agent_with_memory/requirements.txt
    ```
-
-### Paso 5: Clonar o Descargar este Repositorio
-
-1. Clona este repositorio o descarga los archivos en tu máquina local.
 
 ## Ejecución del Proyecto
 
 ### Opción 1: Inicio Rápido (Recomendado)
 
-1. Abre una terminal y navega hasta la carpeta del proyecto.
-2. Ejecuta el script de inicio:
-   ```
-   ./start.sh
-   ```
-   o si tienes Node.js instalado:
-   ```
-   npm start
-   ```
-3. El script iniciará automáticamente tanto el servidor Flask como la aplicación Streamlit, y te mostrará las URLs para acceder a la interfaz.
-4. Para detener todos los servicios, simplemente presiona Ctrl+C en la terminal donde ejecutaste el script.
+Puedes iniciar cualquiera de las dos versiones del chat con un solo comando:
+
+```bash
+# Iniciar el chat básico (por defecto)
+./start.sh
+# o
+npm run start-basic
+
+# Iniciar el sistema de agentes con memoria
+./start.sh agent_with_memory
+# o
+npm run start-agent
+```
+
+El script verificará automáticamente:
+- La instalación de Ollama
+- La disponibilidad del modelo llama3.2:1b
+- Las dependencias de Python necesarias
+
+Y luego iniciará tanto el servidor Flask como la aplicación Streamlit.
 
 ### Opción 2: Inicio Manual
 
-#### Paso 1: Iniciar el Servidor Backend
+Si prefieres iniciar los componentes por separado:
 
-1. Abre una terminal y navega hasta la carpeta del proyecto.
-2. Ejecuta el servidor Flask:
-   ```
-   python app.py
-   ```
-   o
-   ```
-   flask run
-   ```
-3. El servidor debería iniciarse en http://127.0.0.1:5000
+#### Chat Básico
 
-#### Paso 2: Iniciar la Interfaz Web
+```bash
+# Terminal 1 - Servidor Flask
+python basic_chat/app.py
+# o
+npm run start-flask-basic
 
-1. Abre otra terminal y navega hasta la carpeta del proyecto.
-2. Ejecuta la aplicación Streamlit:
-   ```
-   streamlit run web.py
-   ```
-3. Se abrirá automáticamente una ventana del navegador con la interfaz web, o puedes acceder a ella en http://localhost:8501
+# Terminal 2 - Interfaz Streamlit
+streamlit run basic_chat/web.py
+# o
+npm run start-streamlit-basic
+```
 
-## Uso
+#### Sistema de Agentes
 
-1. En la interfaz web, escribe tu mensaje en el campo de texto.
-2. Haz clic en el botón "Enviar".
-3. Espera a que el modelo procese tu consulta y muestre la respuesta.
+```bash
+# Terminal 1 - Servidor Flask
+python agent_with_memory/app.py
+# o
+npm run start-flask-agent
+
+# Terminal 2 - Interfaz Streamlit
+streamlit run agent_with_memory/web.py
+# o
+npm run start-streamlit-agent
+```
+
+## Acceso a la Aplicación
+
+- **Interfaz Web**: http://localhost:8501
+- **API Flask**: http://127.0.0.1:5050
+
+## Ayuda
+
+Para ver todas las opciones disponibles:
+
+```bash
+./start.sh --help
+```
 
 ## Solución de Problemas
 
-- Si encuentras errores relacionados con la conexión al servidor Flask, asegúrate de que el servidor esté ejecutándose en http://127.0.0.1:5000.
-- Si el modelo no responde, verifica que Ollama esté funcionando correctamente y que el modelo llama3.2:1b esté instalado.
-
-## Notas
-
-- Este proyecto utiliza el modelo llama3.2:1b, pero puedes modificar el archivo app.py para usar otros modelos disponibles en Ollama.
-- Para una mejor experiencia, se recomienda ejecutar este proyecto en una máquina con suficientes recursos (especialmente RAM).
+- Si encuentras errores de conexión, asegúrate de que Ollama esté en ejecución
+- Para problemas con el modelo, verifica que llama3.2:1b esté instalado: `ollama list`
+- Si las dependencias fallan, ejecuta manualmente: `pip install ollama flask streamlit requests`

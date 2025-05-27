@@ -6,7 +6,34 @@ BLUE="\033[0;34m"
 YELLOW="\033[1;33m"
 NC="\033[0m" # No Color
 
-echo "${GREEN}=== Iniciando Chat Personal con Ollama ===${NC}"
+# Mostrar ayuda si se solicita
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "${GREEN}=== Script de inicio para Chat con Ollama ===${NC}"
+    echo "Uso: ./start.sh [tipo_de_agente]"
+    echo ""
+    echo "Opciones disponibles:"
+    echo "  basic_chat       - Inicia el chat básico (por defecto)"
+    echo "  agent_with_memory - Inicia el sistema de agentes con memoria"
+    echo "  --help, -h       - Muestra este mensaje de ayuda"
+    exit 0
+fi
+
+# Determinar qué agente iniciar (por defecto: basic_chat)
+AGENT_TYPE=${1:-basic_chat}
+
+if [ "$AGENT_TYPE" = "basic_chat" ]; then
+    APP_DIR="basic_chat"
+    APP_NAME="Chat Personal con Ollama"
+elif [ "$AGENT_TYPE" = "agent_with_memory" ]; then
+    APP_DIR="agent_with_memory"
+    APP_NAME="Sistema de Agentes IA Avanzado"
+else
+    echo "${YELLOW}Tipo de agente no válido. Opciones: basic_chat, agent_with_memory${NC}"
+    echo "Usa './start.sh --help' para más información."
+    exit 1
+fi
+
+echo "${GREEN}=== Iniciando $APP_NAME ===${NC}"
 
 # Verificar si Ollama está instalado
 if ! command -v ollama &> /dev/null; then
@@ -27,7 +54,7 @@ pip install -q ollama flask streamlit requests
 
 # Iniciar el servidor Flask en segundo plano
 echo "${GREEN}Iniciando servidor Flask...${NC}"
-flask run &
+(cd "$APP_DIR" && export FLASK_APP=app.py && export FLASK_ENV=production && exec flask run --port=5050) &
 FLASK_PID=$!
 
 # Esperar a que el servidor Flask esté listo
@@ -36,7 +63,7 @@ sleep 3
 
 # Iniciar la aplicación Streamlit
 echo "${GREEN}Iniciando interfaz web con Streamlit...${NC}"
-streamlit run web.py &
+streamlit run "$APP_DIR/web.py" &
 STREAMLIT_PID=$!
 
 # Función para manejar la terminación del script
