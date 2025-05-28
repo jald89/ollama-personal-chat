@@ -168,7 +168,27 @@ if user_input:
                     "content": error_msg
                 })
 st.markdown("---")
-st.markdown(
-    "💡 **Tip:** Puedes crear nuevos agentes agregando archivos de texto en la carpeta `/roles` y usarlos desde la interfaz.\n"
-    "Ejemplo: crea un archivo llamado `aitutor.json` con instrucciones para un tutor experto en IA generativa y Python."
-)
+# Sincronizar tip del agente actual siempre que cambie el agente o al inicio
+if 'last_tip_agent_id' not in st.session_state or st.session_state.current_agent['id'] != st.session_state.get('last_tip_agent_id'):
+    st.session_state.available_agents = get_available_agents()
+    st.session_state.last_tip_agent_id = st.session_state.current_agent['id']
+
+current_agent_id = st.session_state.current_agent.get('id', 'techbot')
+# Evitar KeyError: mostrar solo si existe el agente
+if current_agent_id in st.session_state.available_agents:
+    tip_value = st.session_state.available_agents[current_agent_id].get('tips')
+else:
+    st.warning(f"Agente '{current_agent_id}' no encontrado en la lista de agentes disponibles.")
+    tip_value = None
+if tip_value:
+    st.markdown(f"💡 **Tip:** {tip_value}")
+else:
+    st.markdown(
+        """
+        💡 **Tip:** ¡Personaliza tu experiencia creando tus propios agentes!
+        
+        Solo tienes que agregar archivos `.json` en la carpeta `/roles` con las instrucciones y personalidad que desees. Por ejemplo, puedes crear un archivo llamado `aitutor.json` para un tutor experto en IA generativa y Python.
+        
+        Cada agente puede tener su propio nombre, descripción, mensaje de sistema y consejos personalizados. ¡Explora, experimenta y potencia tus conversaciones con agentes hechos a tu medida!
+        """
+    )

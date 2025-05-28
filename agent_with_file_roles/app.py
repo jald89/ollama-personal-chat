@@ -31,17 +31,8 @@ def load_roles_from_files():
             agents[agent_id] = {
                 'name': data.get('name', agent_id.capitalize() + 'Bot'),
                 'description': data.get('description', ''),
-                'system_message': data.get('system_message', '')
-            }
-        elif filename.endswith('.txt'):
-            agent_id = filename.replace('.txt', '')
-            with open(os.path.join(ROLES_DIR, filename), 'r', encoding='utf-8') as f:
-                content = f.read().strip()
-            public_content = extract_public_role_content(content)
-            agents[agent_id] = {
-                'name': agent_id.capitalize() + 'Bot',
-                'description': public_content,
-                'system_message': content
+                'system_message': data.get('system_message', ''),
+                'tips': data.get('tips', '')
             }
     return agents
 
@@ -72,7 +63,8 @@ def list_agents():
         'available_agents': {
             agent_id: {
                 'name': info['name'],
-                'description': info['description']
+                'description': info['description'],
+                'tips': info.get('tips', '')
             }
             for agent_id, info in AVAILABLE_AGENTS.items()
         }
@@ -93,7 +85,8 @@ def set_agent():
         'agent': {
             'id': agent_id,
             'name': agent_info['name'],
-            'description': agent_info['description']
+            'description': agent_info['description'],
+            'tips': agent_info['tips']
         }
     })
 
@@ -123,7 +116,8 @@ def chat():
             'current_agent': {
                 'id': current_agents.get(session_id, agent_id),
                 'name': current_agent.get('name', 'Unknown'),
-                'description': current_agent.get('description', '')
+                'description': current_agent.get('description', ''),
+                'tips': current_agent('tips', '')
             },
             'message_count': len(messages) - 1
         })
@@ -145,8 +139,10 @@ def create_custom_agent_from_file():
         if filename.endswith('.json'):
             data = json.load(f)
             custom_instructions = data.get('system_message', '')
+            custom_tips = data.get('tips', '')
         else:
             custom_instructions = f.read().strip()
+            custom_tips = ''
     custom_system_message = {
         'role': 'system',
         'content': f'''Eres {agent_name}.\n\n{custom_instructions}\n\nMantén estas instrucciones durante toda la conversación.'''
@@ -158,7 +154,8 @@ def create_custom_agent_from_file():
         'agent': {
             'id': 'custom',
             'name': agent_name,
-            'description': f'Agente personalizado desde {filename}'
+            'description': f'Agente personalizado desde {filename}',
+            'tips': custom_tips
         }
     })
 
