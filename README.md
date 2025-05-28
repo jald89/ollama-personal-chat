@@ -72,13 +72,13 @@ Si prefieres iniciar los componentes por separado:
 ```bash
 # Terminal 1 - Servidor Flask
 python basic_chat/app.py
-# o
-npm run start-flask-basic
 
 # Terminal 2 - Interfaz Streamlit
 streamlit run basic_chat/web.py
-# o
-npm run start-streamlit-basic
+
+# O puedes simplemente correr 
+npm run start-basic
+
 ```
 
 #### Sistema de Agente de servicio tecnico
@@ -86,12 +86,11 @@ npm run start-streamlit-basic
 ```bash
 # Terminal 1 - Servidor Flask
 python single_agent/app.py
-# o
-npm run start-flask-agent
 
 # Terminal 2 - Interfaz Streamlit
 streamlit run single_agent/web.py
-# o
+
+# O puedes simplemente correr 
 npm run start-single
 ```
 
@@ -100,13 +99,12 @@ npm run start-single
 ```bash
 # Terminal 1 - Servidor Flask
 python agent_with_memory/app.py
-# o
-npm run start-flask-agent
 
 # Terminal 2 - Interfaz Streamlit
 streamlit run agent_with_memory/web.py
-# o
-npm run start-streamlit-agent
+
+# O puedes simplemente correr 
+npm run start-agent
 ```
 
 #### Agentes con Roles desde Archivos
@@ -117,6 +115,9 @@ python agent_with_file_roles/app.py
 
 # Terminal 2 - Interfaz Streamlit
 streamlit run agent_with_file_roles/web.py
+
+# O puedes simplemente correr 
+npm run start-agents
 ```
 
 ## Acceso a la Aplicación
