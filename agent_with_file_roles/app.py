@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, jsonify
 import ollama
+import json
 
 app = Flask(__name__)
 
@@ -9,16 +10,37 @@ current_agents = {}
 
 ROLES_DIR = os.path.join(os.path.dirname(__file__), 'roles')
 
+def extract_public_role_content(role_text):
+    """
+    Extrae solo el contenido entre <role>...</role> para la descripción pública.
+    Si no existe, devuelve el texto completo.
+    """
+    import re
+    match = re.search(r"<role>(.*?)</role>", role_text, re.DOTALL | re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+    return role_text.strip()
+
 def load_roles_from_files():
     agents = {}
     for filename in os.listdir(ROLES_DIR):
-        if filename.endswith('.txt'):
+        if filename.endswith('.json'):
+            agent_id = filename.replace('.json', '')
+            with open(os.path.join(ROLES_DIR, filename), 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            agents[agent_id] = {
+                'name': data.get('name', agent_id.capitalize() + 'Bot'),
+                'description': data.get('description', ''),
+                'system_message': data.get('system_message', '')
+            }
+        elif filename.endswith('.txt'):
             agent_id = filename.replace('.txt', '')
             with open(os.path.join(ROLES_DIR, filename), 'r', encoding='utf-8') as f:
                 content = f.read().strip()
+            public_content = extract_public_role_content(content)
             agents[agent_id] = {
                 'name': agent_id.capitalize() + 'Bot',
-                'description': f'Agente {agent_id}',
+                'description': public_content,
                 'system_message': content
             }
     return agents
@@ -120,14 +142,14 @@ def create_custom_agent_from_file():
     if not os.path.isfile(filepath):
         return jsonify({'error': f'Archivo {filename} no encontrado'}), 400
     with open(filepath, 'r', encoding='utf-8') as f:
-        custom_instructions = f.read().strip()
+        if filename.endswith('.json'):
+            data = json.load(f)
+            custom_instructions = data.get('system_message', '')
+        else:
+            custom_instructions = f.read().strip()
     custom_system_message = {
         'role': 'system',
-        'content': f'''Eres {agent_name}.
-
-{custom_instructions}
-
-Mantén estas instrucciones durante toda la conversación.'''
+        'content': f'''Eres {agent_name}.\n\n{custom_instructions}\n\nMantén estas instrucciones durante toda la conversación.'''
     }
     conversation_history[session_id] = [custom_system_message]
     current_agents[session_id] = 'custom'

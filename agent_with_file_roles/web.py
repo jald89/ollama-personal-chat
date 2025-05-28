@@ -90,10 +90,12 @@ with st.sidebar:
         agent_options[display_name] = agent_id
     if agent_options:
         current_display = f"{st.session_state.current_agent['name']} - {st.session_state.current_agent['description']}"
+        # Ajustar para que si el agente actual no está en la lista (por ejemplo, personalizado), se seleccione el primero
+        index = list(agent_options.keys()).index(current_display) if current_display in agent_options else 0
         selected_agent_display = st.selectbox(
             "Selecciona un agente:",
             options=list(agent_options.keys()),
-            index=list(agent_options.keys()).index(current_display) if current_display in agent_options else 0
+            index=index
         )
         selected_agent_id = agent_options[selected_agent_display]
         if st.button("🔄 Cambiar Agente", type="primary"):
@@ -106,7 +108,7 @@ with st.sidebar:
     st.subheader("🛠️ Crear Agente Personalizado desde Archivo")
     with st.expander("➕ Nuevo Agente desde Archivo"):
         custom_name = st.text_input("Nombre del agente:", key="custom_name_file")
-        filename = st.text_input("Nombre del archivo de rol (ej: fitness.txt):", key="custom_file")
+        filename = st.text_input("Nombre del archivo de rol (ej: fitness.json):", key="custom_file")
         if st.button("🚀 Crear Agente desde Archivo"):
             if custom_name and filename:
                 result = create_custom_agent_from_file(custom_name, filename)
@@ -168,5 +170,5 @@ if user_input:
 st.markdown("---")
 st.markdown(
     "💡 **Tip:** Puedes crear nuevos agentes agregando archivos de texto en la carpeta `/roles` y usarlos desde la interfaz.\n"
-    "Ejemplo: crea un archivo llamado `aitutor.txt` con instrucciones para un tutor experto en IA generativa y Python."
+    "Ejemplo: crea un archivo llamado `aitutor.json` con instrucciones para un tutor experto en IA generativa y Python."
 )
