@@ -63,6 +63,20 @@ streamlit run basic_chat/web.py
 npm run start-streamlit-basic
 ```
 
+#### Sistema de Agente de servicio tecnico
+
+```bash
+# Terminal 1 - Servidor Flask
+python single_agent/app.py
+# o
+npm run start-flask-agent
+
+# Terminal 2 - Interfaz Streamlit
+streamlit run single_agent/web.py
+# o
+npm run start-single
+```
+
 #### Sistema de Agentes
 
 ```bash
