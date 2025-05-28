@@ -9,7 +9,7 @@ import json
 import time
 
 # Configuración
-BASE_URL = "http://127.0.0.1:5000"
+BASE_URL = "http://127.0.0.1:5050"
 SESSION_ID = "test_session_123"
 
 def send_message(message):
