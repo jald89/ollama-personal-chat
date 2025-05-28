@@ -2,23 +2,23 @@
 
 ## Descripción General
 
-Este sistema implementa agentes IA donde los roles e instrucciones se cargan dinámicamente desde archivos de texto en la carpeta `roles/`. Permite máxima flexibilidad y personalización sin modificar el código fuente.
+Este sistema implementa agentes IA donde los roles e instrucciones se cargan dinámicamente desde archivos `.json` en la carpeta `roles/`. Permite máxima flexibilidad y personalización sin modificar el código fuente.
 
 ---
 
 ## Arquitectura
 - **Backend:** Flask (`app.py`)
 - **Frontend:** Streamlit (`web.py`)
-- **Roles:** Archivos `.txt` en `roles/` (uno por agente)
+- **Roles:** Archivos `.json` en `roles/` (uno por agente)
 - **Modelo LLM:** Ollama con `llama3.2:1b`
 
 ---
 
 ## Lógica de Carga de Agentes
-- Al iniciar, el backend lee todos los archivos `.txt` en `roles/` y crea el diccionario de agentes.
-- Cada archivo define el `system_message` de un agente.
+- Al iniciar, el backend lee todos los archivos `.json` en `roles/` y crea el diccionario de agentes.
+- Cada archivo define el `name`, `description` y `system_message` de un agente.
 - El nombre del archivo (sin extensión) es el `agent_id`.
-- Puedes crear agentes personalizados desde la interfaz web, seleccionando cualquier archivo de rol.
+- Puedes crear agentes personalizados desde la interfaz web, seleccionando cualquier archivo de rol `.json`.
 
 ---
 
@@ -42,16 +42,28 @@ Este sistema implementa agentes IA donde los roles e instrucciones se cargan din
 ## Ejemplo de Estructura de roles/
 ```
 roles/
-├── techbot.txt
-├── mathtutor.txt
-├── chef.txt
-├── fitness.txt
-├── creative.txt
-└── business.txt
+├── techbot.json
+├── mathtutor.json
+├── chef.json
+├── fitness.json
+├── creative.json
+├── business.json
+├── aitutor.json
+├── aiprogramer.json
 ```
 
 ---
 
 ## Personalización
-- Para agregar un nuevo agente, solo crea un archivo `.txt` en `roles/`.
+- Para agregar un nuevo agente, solo crea un archivo `.json` en `roles/` con la estructura:
+
+```json
+{
+  "name": "NombreAgente",
+  "description": "Breve descripción del agente",
+  "system_message": "Instrucciones completas y personalidad del agente."
+}
+```
+
 - El contenido del archivo será el prompt/instrucciones del agente.
+- Reinicia el backend para que el nuevo agente esté disponible.
