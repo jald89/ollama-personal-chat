@@ -53,7 +53,7 @@ npm run start-agent
 # Iniciar el sistema de agentes con roles desde archivos
 ./start.sh agent_with_file_roles
 # o
-npm run start-file-roles
+npm run start-agents
 ```
 
 El script verificará automáticamente:
