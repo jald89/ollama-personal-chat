@@ -12,9 +12,11 @@ if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
     echo "Uso: ./start.sh [tipo_de_agente]"
     echo ""
     echo "Opciones disponibles:"
-    echo "  basic_chat       - Inicia el chat básico (por defecto)"
-    echo "  agent_with_memory - Inicia el sistema de agentes con memoria"
-    echo "  --help, -h       - Muestra este mensaje de ayuda"
+    echo "  basic_chat             - Inicia el chat básico (por defecto)"
+    echo "  agent_with_memory      - Inicia el sistema de agentes con memoria"
+    echo "  single_agent           - Inicia el sistema de agente único"
+    echo "  agent_with_file_roles  - Inicia el sistema de agentes con roles desde archivos"
+    echo "  --help, -h             - Muestra este mensaje de ayuda"
     exit 0
 fi
 
@@ -29,9 +31,12 @@ elif [ "$AGENT_TYPE" = "agent_with_memory" ]; then
     APP_NAME="Sistema de Agentes IA Avanzado"
 elif [ "$AGENT_TYPE" = "single_agent" ]; then
     APP_DIR="single_agent"
-    APP_NAME="Sistema de Agentes IA"
+    APP_NAME="Sistema de Agente Único"
+elif [ "$AGENT_TYPE" = "agent_with_file_roles" ]; then
+    APP_DIR="agent_with_file_roles"
+    APP_NAME="Agentes IA con Roles desde Archivos"
 else
-    echo "${YELLOW}Tipo de agente no válido. Opciones: basic_chat, agent_with_memory${NC}"
+    echo "${YELLOW}Tipo de agente no válido. Opciones: basic_chat, agent_with_memory, single_agent, agent_with_file_roles${NC}"
     echo "Usa './start.sh --help' para más información."
     exit 1
 fi

@@ -4,11 +4,14 @@
 > - [basic_chat/docs.md](./basic_chat/docs.md)
 > - [single_agent/docs.md](./single_agent/docs.md)
 > - [agent_with_memory/docs.md](./agent_with_memory/docs.md)
+> - [agent_with_file_roles/docs.md](./agent_with_file_roles/docs.md)
 
-Este proyecto implementa un chat interactivo utilizando Ollama con el modelo Llama 3.2, ofreciendo dos versiones diferentes:
+Este proyecto implementa un chat interactivo utilizando Ollama con el modelo Llama 3.2, ofreciendo varias versiones:
 
 1. **Chat Básico** - Una interfaz simple para conversar con el modelo.
-2. **Sistema de Agentes IA** - Una versión avanzada con múltiples personalidades y memoria persistente.
+2. **Sistema de Agente Único** - Un agente especializado con memoria.
+3. **Sistema de Agentes IA** - Múltiples personalidades y memoria persistente.
+4. **Agentes con Roles desde Archivos** - Los roles e instrucciones de los agentes se cargan dinámicamente desde archivos en la carpeta `roles/`.
 
 ## Requisitos Previos
 
@@ -29,7 +32,7 @@ Este proyecto implementa un chat interactivo utilizando Ollama con el modelo Lla
 
 ### Opción 1: Inicio Rápido (Recomendado)
 
-Puedes iniciar cualquiera de las dos versiones del chat con un solo comando:
+Puedes iniciar cualquiera de las versiones del chat con un solo comando:
 
 ```bash
 # Iniciar el chat básico (por defecto)
@@ -37,10 +40,20 @@ Puedes iniciar cualquiera de las dos versiones del chat con un solo comando:
 # o
 npm run start-basic
 
+# Iniciar el sistema de agente único
+./start.sh single_agent
+# o
+npm run start-single
+
 # Iniciar el sistema de agentes con memoria
 ./start.sh agent_with_memory
 # o
 npm run start-agent
+
+# Iniciar el sistema de agentes con roles desde archivos
+./start.sh agent_with_file_roles
+# o
+npm run start-file-roles
 ```
 
 El script verificará automáticamente:
@@ -94,6 +107,16 @@ npm run start-flask-agent
 streamlit run agent_with_memory/web.py
 # o
 npm run start-streamlit-agent
+```
+
+#### Agentes con Roles desde Archivos
+
+```bash
+# Terminal 1 - Servidor Flask
+python agent_with_file_roles/app.py
+
+# Terminal 2 - Interfaz Streamlit
+streamlit run agent_with_file_roles/web.py
 ```
 
 ## Acceso a la Aplicación
