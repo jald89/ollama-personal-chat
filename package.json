@@ -7,6 +7,7 @@
     "start": "./start.sh basic_chat",
     "start-basic": "./start.sh basic_chat > /dev/null 2>&1 &",
     "start-agent": "./start.sh agent_with_memory > /dev/null 2>&1 &",
+    "start-single": "./start.sh single_agent > /dev/null 2>&1 &",
     "stop": "./stop.sh"
   },
   "keywords": [

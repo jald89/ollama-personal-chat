@@ -27,6 +27,9 @@ if [ "$AGENT_TYPE" = "basic_chat" ]; then
 elif [ "$AGENT_TYPE" = "agent_with_memory" ]; then
     APP_DIR="agent_with_memory"
     APP_NAME="Sistema de Agentes IA Avanzado"
+elif [ "$AGENT_TYPE" = "single_agent" ]; then
+    APP_DIR="single_agent"
+    APP_NAME="Sistema de Agentes IA"
 else
     echo "${YELLOW}Tipo de agente no válido. Opciones: basic_chat, agent_with_memory${NC}"
     echo "Usa './start.sh --help' para más información."
