@@ -59,39 +59,42 @@ proyecto/
 ## 🚀 Instalación y Ejecución
 
 ### Prerequisitos
-1. **Ollama instalado**: Descargar de [ollama.com](https://ollama.com)
-2. **Modelo Llama 3.2**: `ollama pull llama3.2:1b`
-3. **Python 3.8+**
+
+- Ollama instalado: Descargar de [ollama.com](https://ollama.com)
+- Modelo Llama 3.2: `ollama pull llama3.2:1b`
+- Python 3.8+
 
 ### Pasos de instalación:
 
 ```bash
 # 1. Clonar o descargar los archivos del proyecto
-cd tu-directorio-proyecto
-
-# 2. Instalar dependencias
+cd single_agent
 pip install -r requirements.txt
+```
 
-# 3. Verificar que Ollama esté corriendo
-ollama list  # Debe mostrar llama3.2:1b
+### Opción 1: Inicio Rápido
 
-# 4. Ejecutar servidor Flask (Terminal 1)
+```bash
+# Desde la raíz del monorepo
+./start.sh single_agent
+```
+
+### Opción 2: Inicio Manual
+
+```bash
+# Terminal 1 - Ejecutar servidor Flask
 python app.py
+# o
+flask run --port=5050
 
-# 5. Ejecutar Streamlit (Terminal 2)
-streamlit run streamlit_app.py
-
-# 6. (Opcional) Ejecutar pruebas automatizadas (Terminal 3)
-python test_memory.py
+# Terminal 2 - Ejecutar Streamlit
+streamlit run web.py
 ```
 
 ### URLs de acceso:
+
 - **Chat Interface**: http://localhost:8501
-- **Flask API**: http://127.0.0.1:5000
-- **API Endpoints**:
-  - `POST /chat` - Enviar mensaje
-  - `POST /reset` - Reiniciar conversación
-  - `GET /history` - Obtener historial
+- **Flask API**: http://127.0.0.1:5050
 
 ## 🧪 Pruebas de Funcionalidad
 

@@ -93,15 +93,17 @@ ollama list  # Debe mostrar llama3.2:1b
 ```bash
 # Desde la carpeta raíz del proyecto
 ./start.sh agent_with_memory
-# o
-npm run start-agent
 ```
+
+> **Nota:** El comando `npm run start-agent` solo funciona si tienes el script definido en el `package.json` de la raíz del monorepo. Si no usas Node.js, ejecuta el script bash directamente como arriba.
 
 ### Opción 2: Inicio Manual
 
 ```bash
 # Terminal 1 - Ejecutar servidor Flask
-flask run port=5050
+python app.py
+# o
+flask run --port=5050
  
 # Terminal 2 - Ejecutar Streamlit
 streamlit run web.py

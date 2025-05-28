@@ -67,13 +67,10 @@ Esta es la versión básica del chat, que proporciona una interfaz simple para i
 
 1. Abre una terminal y navega hasta la carpeta del proyecto.
 2. Ejecuta el script de inicio:
+   ```bash
+   ./start.sh basic_chat
    ```
-   ./start.sh
-   ```
-   o si tienes Node.js instalado:
-   ```
-   npm start
-   ```
+   > **Nota:** El comando `npm start` no existe en este proyecto. Usa el script bash anterior.
 3. El script iniciará automáticamente tanto el servidor Flask como la aplicación Streamlit, y te mostrará las URLs para acceder a la interfaz.
 4. Para detener todos los servicios, simplemente presiona Ctrl+C en la terminal donde ejecutaste el script.
 
