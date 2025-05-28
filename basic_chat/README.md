@@ -1,5 +1,7 @@
 # Chat Personal con Ollama (Versión Básica)
 
+> **¿Buscas la documentación técnica y explicación de la lógica? Consulta [`docs.md`](./docs.md)**
+
 Este proyecto implementa un chatbot personal que utiliza Ollama con el modelo Llama 3.2 para procesar consultas y generar respuestas. Consta de un backend en Flask y una interfaz de usuario en Streamlit.
 
 Esta es la versión básica del chat, que proporciona una interfaz simple para interactuar con el modelo de lenguaje sin funcionalidades avanzadas como memoria o personalidades.

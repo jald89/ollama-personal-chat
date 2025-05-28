@@ -1,5 +1,10 @@
 # Chat Personal con Ollama
 
+> **Documentación técnica de cada sistema:**
+> - [basic_chat/docs.md](./basic_chat/docs.md)
+> - [single_agent/docs.md](./single_agent/docs.md)
+> - [agent_with_memory/docs.md](./agent_with_memory/docs.md)
+
 Este proyecto implementa un chat interactivo utilizando Ollama con el modelo Llama 3.2, ofreciendo dos versiones diferentes:
 
 1. **Chat Básico** - Una interfaz simple para conversar con el modelo.

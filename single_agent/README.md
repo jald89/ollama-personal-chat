@@ -1,5 +1,7 @@
 # 🤖 TechBot - Chat Interactivo con Ollama y Llama 3.2
 
+> **¿Buscas la documentación técnica y explicación de la lógica? Consulta [`docs.md`](./docs.md)**
+
 ## 📋 Descripción del Proyecto
 
 Este proyecto implementa un **chat interactivo con memoria** utilizando **Ollama** y el modelo **Llama 3.2**. Incluye un **agente personalizado** (TechBot) especializado en soporte técnico con capacidad de mantener contexto a lo largo de conversaciones completas.
